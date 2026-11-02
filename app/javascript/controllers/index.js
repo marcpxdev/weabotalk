@@ -9,6 +9,8 @@ import UserSearchController from "./user_search_controller"
 import FlashController from "./flash_controller"
 import DropdownController from "./dropdown_controller"
 import ConfirmDialogController from "./confirm_dialog_controller"
+import NotificationPollingController from "./notification_polling_controller"
+import NotificationBellController from "./notification_bell_controller"
 
 const application = Application.start()
 
@@ -22,5 +24,7 @@ application.register("user-search", UserSearchController)
 application.register("flash", FlashController)
 application.register("dropdown", DropdownController)
 application.register("confirm-dialog", ConfirmDialogController)
+application.register("notification-polling", NotificationPollingController)
+application.register("notification-bell", NotificationBellController)
 
 export { application }
