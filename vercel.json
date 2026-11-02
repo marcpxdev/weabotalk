@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/ruby",
+      "config": {
+        "version": 4,
+        "nodeVersion": "18",
+        "rubyVersion": "4.0.0",
+        "bundlerVersion": "2.4.6"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/.vercel/next-render?path=/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/.vercel/next-render?path=/$1"
+    }
+  ],
+  "env": {
+    "NODE_VERSION": "18",
+    "BUNDLER_VERSION": "2.4.6",
+    "RAILS_ENV": "production",
+    "RAILS_MAX_THREADS": "5"
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

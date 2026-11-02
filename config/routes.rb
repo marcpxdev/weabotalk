@@ -25,11 +25,11 @@ Rails.application.routes.draw do
   # User Profiles
   get "/profiles/:username", to: "profiles#show", as: :profile
   # Follows (one-way): follow / unfollow, and the lists on a profile
-  get "/profiles/:username/follow", to: "follows#show", as: :follow_profile
-  post "/profiles/:username/follow", to: "follows#create"
-  delete "/profiles/:username/follow", to: "follows#destroy"
-  get "/profiles/:username/followers", to: "follows#followers", as: :profile_followers
-  get "/profiles/:username/following", to: "follows#following", as: :profile_following
+  get "/profiles/:username/follow", to: "profiles#show", as: :follow_profile
+  post "/profiles/:username/follow", to: "profiles#create"
+  delete "/profiles/:username/follow", to: "profiles#destroy"
+  get "/profiles/:username/followers", to: "profiles#followers", as: :profile_followers
+  get "/profiles/:username/following", to: "profiles#following", as: :profile_following
   get "/profiles/:username/edit", to: "profiles#edit", as: :edit_profile
   patch "/profiles/:username", to: "profiles#update"
   put "/profiles/:username", to: "profiles#update"
@@ -61,6 +61,12 @@ Rails.application.routes.draw do
   resources :notifications, only: [ :index, :destroy ]
   patch "notifications/:id/mark-as-read", to: "notifications#mark_as_read", as: :mark_notification_as_read
   patch "notifications/mark-all-as-read", to: "notifications#mark_all_as_read", as: :mark_all_notifications_as_read
+
+  # Polling API endpoints for Vercel deployment
+  namespace :notifications do
+    get :polling, defaults: { format: :json }
+    post :polling, to: :refresh, defaults: { format: :json }
+  end
 
   # Defines the root path route ("/")
   root "pages#home"

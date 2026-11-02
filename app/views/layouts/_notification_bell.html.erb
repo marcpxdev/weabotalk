@@ -1,0 +1,29 @@
+<div class="notification-container" data-controller="notification-bell">
+  <button class="notification-bell"
+          type="button"
+          data-action="click->notification-bell#toggleNotificationDropdown"
+          aria-label="Notifications"
+          data-testid="notification-bell">
+    <span class="bell-icon" aria-hidden="true">🔔</span>
+    <span class="notification-count" data-notification-bell-target="count">0</span>
+    <span class="sr-only">You have 0 unread notifications</span>
+  </button>
+
+  <div class="notification-dropdown"
+       data-notification-bell-target="container"
+       role="menu"
+       aria-label="Notifications menu">
+    <div class="notification-loading" data-notification-bell-target="status" style="display: none;">
+      <span class="loading-spinner"></span>
+      <span>Loading notifications...</span>
+    </div>
+    <div class="notification-content" role="none">
+      <!-- Notifications will be populated by JavaScript -->
+      <div class="loading-placeholder">
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
