@@ -12,11 +12,14 @@ export default class extends Controller {
 
     // Start polling
     this.startPolling()
+
+    // Add outside click handler
+    document.addEventListener('click', this.handleOutsideClick.bind(this))
   }
 
   disconnect() {
     // Clean up event listeners
-    this.bellTarget.removeEventListener('click', this.toggleNotificationDropdown)
+    this.bellTarget.removeEventListener('click', this.toggleNotificationDropdown.bind(this))
     document.removeEventListener('click', this.handleOutsideClick.bind(this))
 
     if (this.pollingInterval) {
